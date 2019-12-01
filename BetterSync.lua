@@ -369,9 +369,11 @@ local function desync()
     end
 
     if (fakeMovingSide:GetValue() > 0) then
-        if (math.sqrt(entities.GetLocalPlayer():GetPropFloat( "localdata", "m_vecVelocity[0]" )^2 + entities.GetLocalPlayer():GetPropFloat( "localdata", "m_vecVelocity[1]" )^2) > 3) then
-            if fakeMovingSide:GetValue() == 1 then dv = 3 end
-            if fakeMovingSide:GetValue() == 2 then dv = 2 end
+        if (entities.GetLocalPlayer():GetPropFloat( "localdata", "m_vecVelocity[0]") ~= nil and entities.GetLocalPlayer():GetPropFloat( "localdata", "m_vecVelocity[1]" ) ~= nil) then
+            if (math.sqrt(entities.GetLocalPlayer():GetPropFloat( "localdata", "m_vecVelocity[0]" )^2 + entities.GetLocalPlayer():GetPropFloat( "localdata", "m_vecVelocity[1]" )^2) > 3) then
+                if fakeMovingSide:GetValue() == 1 then dv = 3 end
+                if fakeMovingSide:GetValue() == 2 then dv = 2 end
+            end
         end
     end
 
