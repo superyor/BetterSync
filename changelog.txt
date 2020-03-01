@@ -34,3 +34,7 @@ Changelog:
 [Release 3.6]
 * Added Changelogs to Autoupdater tab.
 * Added "Stable Build" after version number in a text in the Autoupdater tab while being on the stable build.
+
+[Release 3.6b]
+* Fixed broken groupbox position.
+* Fixed mistype in the credits.

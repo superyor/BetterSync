@@ -9,7 +9,7 @@ local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/BetterSync.lua";
 local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/BetterSyncBeta.lua"
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it.")#
-local VERSION_NUMBER = "3.6"; --- This too
+local VERSION_NUMBER = "3.6b"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -62,9 +62,7 @@ local BETTERSYNC_ANTILBY  = gui.Checkbox(BETTERSYNC_DESYNC_GROUP, "rbot.bettersy
 --- Misc GUI Stuff
 local BETTERSYNC_JUMPSCOUT = gui.Checkbox(BETTERSYNC_MISC_GROUP, "rbot.bettersync.misc.jumpscout", "Fix Jumpscout", 0)
 local BETTERSYNC_PULSEFAKE = gui.Checkbox(BETTERSYNC_MISC_GROUP, "rbot.bettersync.misc.pulsefake", "Pulsating Fake Chams", 0);
-local BETTERSYNC_CREDITS = gui.Text(BETTERSYNC_MISC_GROUP, "Made witth love by superyu'#7167.")
-local BETTERSYNC_CREDITS2 = gui.Text(BETTERSYNC_MISC_GROUP, "Thanks to everyone that supports me!")
-local BETTERSYNC_CREDITS3 = gui.Text(BETTERSYNC_MISC_GROUP, "Shoutouts to Shady and Cheeseot!")
+local BETTERSYNC_CREDITS = gui.Text(BETTERSYNC_MISC_GROUP, "Made with love by superyu'#7167.         Thanks to everyone that supports me!    Shoutouts to Shady and Cheeseot!")
 
 ---Sway GUI Stuff
 local BETTERSYNC_SWAY_ROTATION_SPEED = gui.Slider(BETTERSYNC_SWAY_ROTATION_GROUP, "rbot.bettersync.sway.rotation.speed", "Speed", 3, 1, 15);
