@@ -103,6 +103,14 @@ better.
 ###### [Release 3.5a to 3.5e]
 * Various fixes around the Beta Downloader
 
+###### [Release 3.6]
+* Added Changelogs to Autoupdater tab.
+* Added "Stable Build" after version number in a text in the Autoupdater tab while being on the stable build.
+
+###### [Release 3.6b]
+* Fixed broken groupbox position.
+* Fixed mistype in the credits.
+
 ## Contact:
 * E-Mail: superyu.development@gmail.com
 * Discord: superyu'#7167
