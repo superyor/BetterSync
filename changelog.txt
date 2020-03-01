@@ -30,3 +30,7 @@ Changelog:
 
 [Release 3.5a to 3.5e]
 * Various fixes around the Beta Downloader
+
+[Release 3.6]
+* Added Changelogs to Autoupdater tab.
+* Added "Stable Build" after version number in a text in the Autoupdater tab while being on the stable build.
