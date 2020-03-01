@@ -9,7 +9,7 @@ local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/BetterSync.lua";
 local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/BetterSyncBeta.lua"
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it.")#
-local VERSION_NUMBER = "3.6b"; --- This too
+local VERSION_NUMBER = "3.6c"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -48,7 +48,7 @@ end
 --- BetterSync Tab
 local BETTERSYNC_TAB = gui.Tab(gui.Reference("Ragebot"), "bettersync.tab", "BetterSync")
 local BETTERSYNC_DESYNC_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "Desync", 15, 15, 240, 325);
-local BETTERSYNC_MISC_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "Misc", 15, 30+(325/2)+15+58, 240, 100)
+local BETTERSYNC_MISC_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "Misc", 15, 30+(325/2)+15+68, 240, 100)
 local BETTERSYNC_SWAY_ROTATION_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "Rotation Sway", 255+15, 15, 350, 500);
 local BETTERSYNC_SWAY_LBY_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "LBY Sway", 255+15, 15+250, 350, 500);
 

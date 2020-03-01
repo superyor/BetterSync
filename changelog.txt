@@ -38,3 +38,6 @@ Changelog:
 [Release 3.6b]
 * Fixed broken groupbox position.
 * Fixed mistype in the credits.
+
+[Release 3.6c]
+* Fixed broken groupbox position. (Again)
