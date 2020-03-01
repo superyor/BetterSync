@@ -9,7 +9,7 @@ local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/BetterSync.lua";
 local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/BetterSyncBeta.lua"
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it.")#
-local VERSION_NUMBER = "3.6c"; --- This too
+local VERSION_NUMBER = "3.6.1"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -48,9 +48,9 @@ end
 --- BetterSync Tab
 local BETTERSYNC_TAB = gui.Tab(gui.Reference("Ragebot"), "bettersync.tab", "BetterSync")
 local BETTERSYNC_DESYNC_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "Desync", 15, 15, 240, 325);
-local BETTERSYNC_MISC_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "Misc", 15, 30+(325/2)+15+68, 240, 100)
+local BETTERSYNC_MISC_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "Misc", 15, 30+(325/1.5)+15+68+15, 240, 100)
 local BETTERSYNC_SWAY_ROTATION_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "Rotation Sway", 255+15, 15, 350, 500);
-local BETTERSYNC_SWAY_LBY_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "LBY Sway", 255+15, 15+250, 350, 500);
+local BETTERSYNC_SWAY_LBY_GROUP = gui.Groupbox(gui.Reference("Ragebot", "BetterSync"), "LBY Sway", 255+15, 15+310, 350, 500);
 
 --- Desync GUI Stuff
 local BETTERSYNC_ENABLE = gui.Checkbox(BETTERSYNC_DESYNC_GROUP, "rbot.bettersync.enabled", "Enabled", false)
@@ -75,6 +75,22 @@ local BETTERSYNC_SWAY_LBY_SPEED = gui.Slider(BETTERSYNC_SWAY_LBY_GROUP, "rbot.be
 local BETTERSYNC_SWAY_LBY_RANGE1 = gui.Slider(BETTERSYNC_SWAY_LBY_GROUP, "rbot.bettersync.sway.lby.rangestart", "Range Start", -180, -180, 180);
 local BETTERSYNC_SWAY_LBY_RANGE2 = gui.Slider(BETTERSYNC_SWAY_LBY_GROUP, "rbot.bettersync.sway.lby.rangeend", "Range End", 180, -180, 180);
 local BETTERSYNC_SWAY_LBY_DEADZONE = gui.Slider(BETTERSYNC_SWAY_LBY_GROUP, "rbot.bettersync.sway.lby.deadzone", "Deadzone", 90, 0, 180);
+
+--- Descriptions
+BETTERSYNC_ENABLE:SetDescription("Enables BetterSync.")
+BETTERSYNC_LBY_MODE:SetDescription("The kind of LBY you want to have.")
+BETTERSYNC_LBY_FACTOR:SetDescription("The strength of the LBY.")
+BETTERSYNC_ANTILBY:SetDescription("Tries to make your LBY update constantly.")
+BETTERSYNC_JUMPSCOUT:SetDescription("Turns off autostrafer while standing.")
+BETTERSYNC_PULSEFAKE:SetDescription("Makes your fake ghost pulsate.")
+BETTERSYNC_SWAY_ROTATION_SPEED:SetDescription("Speed of the sway.")
+BETTERSYNC_SWAY_ROTATION_RANGE1:SetDescription("Range start of the sway.")
+BETTERSYNC_SWAY_ROTATION_RANGE2:SetDescription("Range end of the sway.")
+BETTERSYNC_SWAY_ROTATION_DEADZONE:SetDescription("Deadzone of the sway.")
+BETTERSYNC_SWAY_LBY_SPEED:SetDescription("Speed of the sway.")
+BETTERSYNC_SWAY_LBY_RANGE1:SetDescription("Range start of the sway.")
+BETTERSYNC_SWAY_LBY_RANGE2:SetDescription("Range end of the sway.")
+BETTERSYNC_SWAY_LBY_DEADZONE:SetDescription("Deadzone of the sway.")
 
 --- BetterSync Variables
 local pLocal;

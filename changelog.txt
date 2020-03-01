@@ -41,3 +41,6 @@ Changelog:
 
 [Release 3.6c]
 * Fixed broken groupbox position. (Again)
+
+[Release 3.6.1]
+* Added descriptions for every function.
