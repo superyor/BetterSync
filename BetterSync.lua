@@ -9,7 +9,7 @@ local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/BetterSync.lua";
 local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/BetterSyncBeta.lua"
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/BetterSync/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it.")#
-local VERSION_NUMBER = "3.5e"; --- This too
+local VERSION_NUMBER = "3.6"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -40,6 +40,10 @@ local function betaUpdate()
 end
 
 local BETTERSYNC_UPDATER_BETABUTTON = gui.Button(BETTERSYNC_UPDATER_GROUP, "Download Beta Client", betaUpdate)
+local BETTERSYNC_CHANGELOG_CONTENT = http.Get("https://raw.githubusercontent.com/superyor/BetterSync/master/changelog.txt")
+if BETTERSYNC_CHANGELOG_CONTENT ~= nil or BETTERSYNC_CHANGELOG_CONTENT ~= "" then
+    local BETTERSYNC_CHANGELOG_TEXT = gui.Text(BETTERSYNC_UPDATER_GROUP, BETTERSYNC_CHANGELOG_CONTENT)
+end
 
 --- BetterSync Tab
 local BETTERSYNC_TAB = gui.Tab(gui.Reference("Ragebot"), "bettersync.tab", "BetterSync")
@@ -124,7 +128,8 @@ end
 
 local function handleDesync()
 
-    local val = gui.GetValue("rbot.antiaim.base.rotation");
+    local val = 0;
+    local lby = 0;
 
     if globals.TickCount() > lastTick then
 
@@ -211,8 +216,6 @@ local function handleDesync()
             gui.SetValue("rbot.antiaim.left.lby", cs3)
             gui.SetValue("rbot.antiaim.right.lby", cs3)
         end
-
-        local lby = 0
 
         if BETTERSYNC_LBY_MODE:GetValue() > 0 and BETTERSYNC_LBY_MODE:GetValue() ~= 4 then
 
@@ -388,7 +391,7 @@ local function handleUpdates()
             if isBeta then
                 BETTERSYNC_UPDATER_TEXT:SetText("You are using the newest Beta client. Current Version: v" .. VERSION_NUMBER .. " Beta Build")
             else
-                BETTERSYNC_UPDATER_TEXT:SetText("Your client is up to date. Current Version: v" .. VERSION_NUMBER)
+                BETTERSYNC_UPDATER_TEXT:SetText("Your client is up to date. Current Version: v" .. VERSION_NUMBER .. " Stable Build")
             end
         end
     end

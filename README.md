@@ -94,6 +94,15 @@ better.
 * Added seperate LBY Sway
 * Made LBY Modes more simpler (more minimalistic).
 
+###### [Release 3.5]
+* Added Beta build + Button to download the beta build.
+
+###### [Release 3.5 - BETA BUILD UPDATE]
+* Added Suyucore to the beta build.
+
+###### [Release 3.5a to 3.5e]
+* Various fixes around the Beta Downloader
+
 ## Contact:
 * E-Mail: superyu.development@gmail.com
 * Discord: superyu'#7167
