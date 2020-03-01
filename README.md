@@ -111,6 +111,9 @@ better.
 * Fixed broken groupbox position.
 * Fixed mistype in the credits.
 
+###### [Release 3.6c]
+* Fixed broken groupbox position. (Again)
+
 ## Contact:
 * E-Mail: superyu.development@gmail.com
 * Discord: superyu'#7167
