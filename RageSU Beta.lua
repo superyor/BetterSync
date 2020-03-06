@@ -12,7 +12,7 @@ local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU.lua";
 local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU%20Beta.lua"
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it."
-local VERSION_NUMBER = "4"; --- This too
+local VERSION_NUMBER = "4.0.1"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -103,61 +103,61 @@ local nospreadYaw = 180;
 local nospreadRNG = 1;
 
 local function handleOther()
-
-    if globals.TickCount() > lastTick then
-
+    if BETAFEATURE_LAGSYNC:GetValue() then
         suyuSwitch = not suyuSwitch;
+        local rotation = 0;
+        local yaw = 180;
+        local lby = 0;
 
-        if BETAFEATURE_LAGSYNC:GetValue() then  
-            local rotation = 0;
-            local yaw = 180;
-            local lby = 0;
-
+        if not pLocal then
+            return
+        end
+    
+        local vel = math.sqrt(pLocal:GetPropFloat( "localdata", "m_vecVelocity[0]" )^2 + pLocal:GetPropFloat( "localdata", "m_vecVelocity[1]" )^2)
+    
+        if vel < 5 then
             if suyuSwitch then
-                rotation = -55
+                rotation = -40
+                yaw = 167
+                lby = 0
+            else
+                rotation = -20
                 yaw = -170
                 lby = 40
+            end
+
+            --[[if suyuSwitch then
+                rotation = 55
+                yaw = -150  
+                lby = 0
             else
-                rotation = -30
+                rotation = -55
                 yaw = 170
-                lby = 58
+                lby = 0
+            end]]
+        else
+            if suyuSwitch then
+                rotation = -50
+                yaw = 167
+                lby = 10
+            else
+                rotation = -15
+                yaw = -160
+                lby = 50
             end
-
-            gui.SetValue("rbot.antiaim.base.rotation", rotation)
-            gui.SetValue("rbot.antiaim.base", yaw)
-            gui.SetValue("rbot.antiaim.base.lby", lby)
-
-            gui.SetValue("rbot.antiaim.right.rotation", rotation * -1)
-            gui.SetValue("rbot.antiaim.right", yaw * -1)
-            gui.SetValue("rbot.antiaim.right.lby", lby * -1)
-            
-            gui.SetValue("rbot.antiaim.left.rotation", rotation)
-            gui.SetValue("rbot.antiaim.left", yaw)
-            gui.SetValue("rbot.antiaim.left.lby", lby)
         end
 
-        if BETAFEATURE_180S:GetValue() then
+        gui.SetValue("rbot.antiaim.base.rotation", rotation)
+        gui.SetValue("rbot.antiaim.base", yaw)
+        gui.SetValue("rbot.antiaim.base.lby", lby)
 
-            if nospreadYaw > 179 then
-                nospreadYaw = -180
-            elseif nospreadYaw > -89 and nospreadYaw < 89 then
-                nospreadYaw = 90
-            elseif pLocal ~= nil and pLocal:IsAlive() then
-                local onground = bit.band(pLocal:GetPropInt("m_fFlags"), 1);
-                if onground == 1 then
-                    nospreadYaw = 90
-                    rng = 1.25 + (math.random(0, 250) / 100)
-                else
-                    print("Speed: " .. rng)
-                    nospreadYaw = nospreadYaw + rng;
-                end
-            end
-            gui.SetValue("rbot.antiaim.base", nospreadYaw)
-            gui.SetValue("rbot.antiaim.base.rotation", 58)
-            gui.SetValue("rbot.antiaim.base.lby", -120)
-        end
-
-        lastTick = globals.TickCount()
+        gui.SetValue("rbot.antiaim.right.rotation", rotation * -1)
+        gui.SetValue("rbot.antiaim.right", yaw * -1)
+        gui.SetValue("rbot.antiaim.right.lby", lby * -1)
+        
+        gui.SetValue("rbot.antiaim.left.rotation", rotation)
+        gui.SetValue("rbot.antiaim.left", yaw)
+        gui.SetValue("rbot.antiaim.left.lby", lby)
     end
 end
 
@@ -291,8 +291,29 @@ local function drawHook()
             handleDesync()
         end
 
-        handleOther()
+        if BETAFEATURE_180S:GetValue() then
+
+            if nospreadYaw > 179 then
+                nospreadYaw = -180
+            elseif nospreadYaw > -89 and nospreadYaw < 89 then
+                nospreadYaw = 90
+            elseif pLocal ~= nil and pLocal:IsAlive() then
+                local onground = bit.band(pLocal:GetPropInt("m_fFlags"), 1);
+                if onground == 1 then
+                    nospreadYaw = 90
+                    rng = 1.25 + (math.random(0, 250) / 100)
+                else
+                    print("Speed: " .. rng)
+                    nospreadYaw = nospreadYaw + rng;
+                end
+            end
+            gui.SetValue("rbot.antiaim.base", nospreadYaw)
+            gui.SetValue("rbot.antiaim.base.rotation", 58)
+            gui.SetValue("rbot.antiaim.base.lby", -120)
+        end
+        
     end
+    handleOther()
 end
 
 --- Callbacks
