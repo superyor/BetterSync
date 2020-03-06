@@ -114,6 +114,9 @@ better.
 ###### [Release 3.6c]
 * Fixed broken groupbox position. (Again)
 
+###### [Release 3.6.1]
+* Added descriptions for every feature.
+
 ## Contact:
 * E-Mail: superyu.development@gmail.com
 * Discord: superyu'#7167
