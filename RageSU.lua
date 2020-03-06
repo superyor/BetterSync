@@ -12,7 +12,7 @@ local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU.lua";
 local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU%20Beta.lua"
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it."
-local VERSION_NUMBER = "4.0.1"; --- This too
+local VERSION_NUMBER = "4.0.2"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -111,9 +111,9 @@ local function handleDesync()
         lby = 0
     elseif RAGESU_LBY_MODE:GetValue() == 1 then
         if rotationVal > 0 then
-            lby = -58
-        else
             lby = 58
+        else
+            lby = -58
         end
     else
         if globals.RealTime() > swayLasttime + 1.125 then

@@ -22,3 +22,11 @@ Beta build:
 * Changes on lagsync
 * Made lagsync framebased instead of tickbased.
 * Added different lagsync values while moving.
+
+[Release 4.0.1]
+Both Builds:
+* Fixed Opposite LBY mode
+
+Beta build:
+* changes on lagsync
+* Added on shot inverter on lagsync

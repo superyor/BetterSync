@@ -12,7 +12,7 @@ local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU.lua";
 local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU%20Beta.lua"
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it."
-local VERSION_NUMBER = "4.0.1"; --- This too
+local VERSION_NUMBER = "4.0.2"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -101,6 +101,7 @@ local ManualRight = false;
 local suyuSwitch = false;
 local nospreadYaw = 180;
 local nospreadRNG = 1;
+local shouldInvert = false;
 
 local function handleOther()
     if BETAFEATURE_LAGSYNC:GetValue() then
@@ -117,13 +118,13 @@ local function handleOther()
     
         if vel < 5 then
             if suyuSwitch then
-                rotation = -40
+                rotation = -55
                 yaw = 167
-                lby = 0
+                lby = 25
             else
-                rotation = -20
+                rotation = -30
                 yaw = -170
-                lby = 40
+                lby = 50
             end
 
             --[[if suyuSwitch then
@@ -147,10 +148,6 @@ local function handleOther()
             end
         end
 
-        gui.SetValue("rbot.antiaim.base.rotation", rotation)
-        gui.SetValue("rbot.antiaim.base", yaw)
-        gui.SetValue("rbot.antiaim.base.lby", lby)
-
         gui.SetValue("rbot.antiaim.right.rotation", rotation * -1)
         gui.SetValue("rbot.antiaim.right", yaw * -1)
         gui.SetValue("rbot.antiaim.right.lby", lby * -1)
@@ -158,6 +155,16 @@ local function handleOther()
         gui.SetValue("rbot.antiaim.left.rotation", rotation)
         gui.SetValue("rbot.antiaim.left", yaw)
         gui.SetValue("rbot.antiaim.left.lby", lby)
+
+        if shouldInvert then
+            rotation = rotation * -1
+            yaw = yaw * -1
+            lby = lby * -1
+        end
+
+        gui.SetValue("rbot.antiaim.base.rotation", rotation)
+        gui.SetValue("rbot.antiaim.base", yaw)
+        gui.SetValue("rbot.antiaim.base.lby", lby)
     end
 end
 
@@ -180,9 +187,9 @@ local function handleDesync()
         lby = 0
     elseif RAGESU_LBY_MODE:GetValue() == 1 then
         if rotationVal > 0 then
-            lby = -58
-        else
             lby = 58
+        else
+            lby = -58
         end
     else
         if globals.RealTime() > swayLasttime + 1.125 then
@@ -316,9 +323,22 @@ local function drawHook()
     handleOther()
 end
 
+local kek = 0
+
+local function eventHook(event)
+    if event:GetName("weapon_fire") then
+        if entities.GetByUserID(event:GetInt("userid")):GetTeamNumber() ~= entities.GetLocalPlayer():GetTeamNumber() then
+            shouldInvert = not shouldInvert;
+            kek = kek + 1
+            print("yeet: " .. kek)
+        end
+    end
+end
+
 --- Callbacks
 callbacks.Register("CreateMove", createMoveHook)
 callbacks.Register("Draw", drawHook);
+callbacks.Register("FireGameEvent", eventHook)
 
 --- Auto updater by ShadyRetard/Shady#0001
 local function handleUpdates()
