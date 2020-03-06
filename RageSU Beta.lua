@@ -9,10 +9,10 @@
 
 --- Auto updater Variables
 local SCRIPT_FILE_NAME = GetScriptName();
-local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSu/master/ragesu.lua";
-local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSu/master/RageSuBeta.lua"
-local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSu/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it.")#
-local VERSION_NUMBER = "4.0"; --- This too
+local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU.lua";
+local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU%20Beta.lua"
+local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it."
+local VERSION_NUMBER = "4"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -39,7 +39,7 @@ local function betaUpdate()
 end
 
 local RAGESU_UPDATER_BETABUTTON = gui.Button(RAGESU_UPDATER_GROUP, "Download Beta Client", betaUpdate)
-local RAGESU_CHANGELOG_CONTENT = http.Get("https://raw.githubusercontent.com/superyor/RageSu/master/changelog.txt")
+local RAGESU_CHANGELOG_CONTENT = http.Get("https://raw.githubusercontent.com/superyor/RageSU/master/changelog.txt")
 if RAGESU_CHANGELOG_CONTENT ~= nil or RAGESU_CHANGELOG_CONTENT ~= "" then
     local RAGESU_CHANGELOG_TEXT = gui.Text(RAGESU_UPDATER_GROUP, RAGESU_CHANGELOG_CONTENT)
 end
@@ -47,7 +47,7 @@ end
 --- News GUI Stuff
 local RAGESU_NEWS_TAB = gui.Tab(gui.Reference("Settings"), "ragesu.news.tab", "RageSu™ News")
 local RAGESU_NEWS_GROUP = gui.Groupbox(RAGESU_NEWS_TAB, "Latest News for RageSu™ | v" .. VERSION_NUMBER, 15, 15, 600, 600)
-local RAGESU_NEWS_CONTENT = http.Get("https://raw.githubusercontent.com/superyor/RageSu/master/news.txt")
+local RAGESU_NEWS_CONTENT = http.Get("https://raw.githubusercontent.com/superyor/RageSU/master/news.txt")
 if RAGESU_NEWS_CONTENT ~= nil or RAGESU_NEWS_CONTENT ~= "" then
     local RAGESU_NEWS_TEXT = gui.Text(RAGESU_NEWS_GROUP, RAGESU_NEWS_CONTENT)
 end
@@ -287,7 +287,6 @@ local function drawHook()
     end
 
     if globals.TickCount() > lastTick then
-
         if not BETAFEATURE_180S:GetValue() and not BETAFEATURE_LAGSYNC:GetValue() then
             handleDesync()
         end
