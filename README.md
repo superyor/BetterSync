@@ -17,7 +17,7 @@ Both builds:
 * Added Autochoose doubletap
 * Added choke shot
 
-## Beta build:
+### Beta build:
 * Added 180s, a nospread antiaim.
 * Changes on lagsync.
 
