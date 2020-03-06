@@ -1,0 +1,7 @@
+Hello BetterSync users!
+I proudly announce the BetterSync v4.0 update.
+With this update the lua is going to change it's direction a bit.
+This lua is going to be an ragebot improving lua that has a slight focus on antiaim.
+In consideration of this change, BetterSync will be renamed to RageSU.
+
+Make sure to check on this tab from time to time!

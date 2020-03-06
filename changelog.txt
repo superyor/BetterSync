@@ -1,46 +1,17 @@
 Changelog:
 
-[Release 3.0]
-* Removed useless functions
-* Fixed lua for Aimware Framework Version 5
+[Release 4.0]
+Both builds:
+* Renamed lua to RageSU to fit the future of the lua script better.
+* Recoded most of the lua script.
+* Added news page.
+* Added invert for the right side of the autodirection.
+* Removed Rotation settings
+* Removed LBY settings
+* Added LBY mode "None", "Opposite" and "Sway"
+* Added Autochoose doubletap
+* Added choke shot
 
-[Release 3.0b]
-* Changed slider starting values.
-* Added "v" in the autoupdater tab infront of the version number.
-
-[Release 3.1]
-* Fixed bug where the lua would stop changing antiaim slider values after a round end/game end/mapchange.
-
-[Release 3.2]
-* Fixed Anti-LBY
-* Added more LBY-Modes
-
-[Release 3.3]
-* Fixed Pulse Fake Chams
-
-[Release 3.4]
-* Added seperate LBY Sway
-* Made LBY Modes more simpler (more minimalistic).
-
-[Release 3.5]
-* Added Beta build + Button to download the beta build.
-
-[Release 3.5 - BETA BUILD UPDATE]
-* Added Suyucore to the beta build.
-
-[Release 3.5a to 3.5e]
-* Various fixes around the Beta Downloader
-
-[Release 3.6]
-* Added Changelogs to Autoupdater tab.
-* Added "Stable Build" after version number in a text in the Autoupdater tab while being on the stable build.
-
-[Release 3.6b]
-* Fixed broken groupbox position.
-* Fixed mistype in the credits.
-
-[Release 3.6c]
-* Fixed broken groupbox position. (Again)
-
-[Release 3.6.1]
-* Added descriptions for every function.
+Beta build:
+* Added 180s, a nospread antiaim.
+* Changes on lagsync.
