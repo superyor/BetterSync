@@ -6,11 +6,11 @@ Both builds:
 * Recoded most of the lua script.
 * Added news page.
 * Added invert for the right side of the autodirection.
-* Removed Rotation settings
-* Removed LBY settings
+* Removed Rotation settings.
+* Removed LBY settings.
 * Added LBY mode "None", "Opposite" and "Sway"
 * Added Autochoose doubletap
-* Added choke shot
+* Added choke shot.
 
 Beta build:
 * Added 180s, a nospread antiaim.
@@ -23,10 +23,25 @@ Beta build:
 * Made lagsync framebased instead of tickbased.
 * Added different lagsync values while moving.
 
-[Release 4.0.1]
+[Release 4.0.2]
 Both Builds:
-* Fixed Opposite LBY mode
+* Fixed Opposite LBY mode.
 
 Beta build:
-* changes on lagsync
-* Added on shot inverter on lagsync
+* changes on lagsync.
+* Added on shot inverter on lagsync.
+
+[Release 4.1]
+Both Builds:
+* Added rotation sway with slightly improved algorithm.
+  * Added rotation sway maximum range.
+  * Added rotation sway minimum range.
+  * Added rotation sway speed.
+
+* Added "Invert on" multibox.
+  * Added "Invert on enemy's shot" option
+
+* Antiaim values are now changed inside of CreateMove instead of Draw.
+* Localized part of the API for faster performance.
+* Adjusted Manual Anti-Aim groupbox.
+* Choke shot now has a slider to adjust how many ticks should be choked.

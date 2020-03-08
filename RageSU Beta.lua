@@ -12,7 +12,7 @@ local SCRIPT_FILE_NAME = GetScriptName();
 local SCRIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU.lua";
 local BETA_SCIPT_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/RageSU%20Beta.lua"
 local VERSION_FILE_ADDR = "https://raw.githubusercontent.com/superyor/RageSU/master/version.txt"; --- in case of update i need to update this. (Note by superyu'#7167 "so i don't forget it."
-local VERSION_NUMBER = "4.0.2"; --- This too
+local VERSION_NUMBER = "4.1"; --- This too
 local version_check_done = false;
 local update_downloaded = false;
 local update_available = false;
@@ -55,12 +55,12 @@ end
 --- RageSu Tab
 local RAGESU_TAB = gui.Tab(gui.Reference("Ragebot"), "ragesu.tab", "RageSu™")
 local RAGESU_MAIN_GROUP = gui.Groupbox(RAGESU_TAB, "Main", 15, 15, 295, 300)
+local RAGESU_MANUALAA_GROUP = gui.Groupbox(RAGESU_TAB, "Manual Anti-Aim (Coming soon)", 15, 380+15, 295, 300)
 local RAGESU_DESYNC_GROUP = gui.Groupbox(RAGESU_TAB, "Desync", 300+25, 15, 300, 300);
-local RAGESU_MANUALAA_GROUP = gui.Groupbox(RAGESU_TAB, "Manual Anti-Aim (Coming soon)", 300+25, 190+25, 300, 300)
 
 --- Main
 local RAGESU_DOUBLETAP = gui.Checkbox(RAGESU_MAIN_GROUP, "rbot.ragesu.misc.doubletap", "Autochoose doubletap", 0)
-local RAGESU_CHOKESHOT = gui.Checkbox(RAGESU_MAIN_GROUP, "rbot.ragesu.misc.chokeshot", "Choke shot", 0)
+local RAGESU_CHOKESHOT = gui.Slider(RAGESU_MAIN_GROUP, "rbot.ragesu.misc.chokeshot", "Choke shot Ticks", 0, 0, 14)
 local RAGESU_JUMPSCOUT = gui.Checkbox(RAGESU_MAIN_GROUP, "rbot.ragesu.misc.jumpscout", "Fix Jumpscout", 0)
 local BETAFEATURE_LAGSYNC = gui.Checkbox(RAGESU_MAIN_GROUP, "rbot.ragesu.betafeatures.lagsync", "Betafeature - Lagsync", false)
 local BETAFEATURE_180S = gui.Checkbox(RAGESU_MAIN_GROUP, "rbot.ragesu.betafeatures.180s", "Betafeature - 180s", false)
@@ -73,15 +73,26 @@ local RAGESU_MANUALAA_RIGHT_KEY = gui.Keybox(RAGESU_MANUALAA_GROUP, "rbot.ragesu
 local RAGESU_MANUALAA_RIGHT_DELTA = gui.Slider(RAGESU_MANUALAA_GROUP, "rbot.ragesu.manualaa.right.delta", "Right Delta", 45, 0, 90)
 
 --- Desync
-local RAGESU_LBY_MODE = gui.Combobox(RAGESU_DESYNC_GROUP, "rbot.ragesu.lby.mode", "LBY", "None", "Opposite", "Sway")
+local RAGESU_ROTATION_SWAY = gui.Checkbox(RAGESU_DESYNC_GROUP, "rbot.ragesu.rotation.sway", "Rotation Sway", false)
+local RAGESU_ROTATION_SWAY_RANGEMAX = gui.Slider(RAGESU_DESYNC_GROUP, "rbot.ragesu.rotation.sway.rangemax", "Rotation Sway Maximum Range", 58, 0, 58, 0.5)
+local RAGESU_ROTATION_SWAY_RANGEMIN = gui.Slider(RAGESU_DESYNC_GROUP, "rbot.ragesu.rotation.sway.rangemin", "Rotation Sway Minimum Range", 58, 0, 56.5, 0.5)
+local RAGESU_ROTATION_SWAY_SPEED = gui.Slider(RAGESU_DESYNC_GROUP, "rbot.ragesu.rotation.sway.speed", "Rotation Sway Speed", 1, 0.5, 1.5, 0.05)
+local RAGESU_LBY_MODE = gui.Combobox(RAGESU_DESYNC_GROUP, "rbot.ragesu.lby.mode", "LBY", "Off", "None", "Opposite", "Sway")
+local RAGESU_DESYNC_INVERT_ON_MULTI = gui.Multibox(RAGESU_DESYNC_GROUP, "Invert on")
+local RAGESU_DESYNC_INVERT_ON_SHOT = gui.Checkbox(RAGESU_DESYNC_INVERT_ON_MULTI, "rbot.ragesu.inverton.shot", "Enemy's shot", false)
 local RAGESU_DESYNC_INVERTER_KEY = gui.Keybox(RAGESU_DESYNC_GROUP, "rbot.ragesu.inverter.key", "Inverter Key", 0)
 
 --- Descriptions
 RAGESU_DOUBLETAP:SetDescription("Chooses Doubletap mode based on Velocity.")
 RAGESU_CHOKESHOT:SetDescription("Chokes the shooting packet.")
 RAGESU_JUMPSCOUT:SetDescription("Disables autostrafer while standing.")
+RAGESU_ROTATION_SWAY:SetDescription("Enables Rotation Sway.")
+RAGESU_ROTATION_SWAY_RANGEMAX:SetDescription("Maximum Range of the rotation sway.")
+RAGESU_ROTATION_SWAY_RANGEMIN:SetDescription("Minimum Range of the rotation sway.")
+RAGESU_ROTATION_SWAY_SPEED:SetDescription("Speed of the rotation sway in angles per tick.")
+RAGESU_DESYNC_INVERT_ON_MULTI:SetDescription("Inverts desync on selected events.")
 RAGESU_LBY_MODE:SetDescription("The kind of LBY you want to have.")
-RAGESU_DESYNC_INVERTER_KEY:SetDescription("Inverts desync rotation.")
+RAGESU_DESYNC_INVERTER_KEY:SetDescription("Inverts desync rotation on key.")
 
 --- Beta feature descriptions
 BETAFEATURE_LAGSYNC:SetDescription("A fakelag abusing exploit to break resolvers.")
@@ -89,10 +100,13 @@ BETAFEATURE_180S:SetDescription("180S is a yaw mode for nospread HvH.")
 
 --- RageSu Variables
 local pLocal;
-local lastTick = 0;
 local desyncInvert = false;
 local swayLasttime = 0;
 local swaySwitch = false;
+local velocity = nil;
+local chokeShotTicks = 0;
+local currentVal = 0;
+local positiveDir = true;
 
 local ManualLeft = false;
 local ManualRight = false;
@@ -103,6 +117,10 @@ local nospreadYaw = 180;
 local nospreadRNG = 1;
 local shouldInvert = false;
 
+--- API Localization for better performance
+SetVal = gui.SetValue
+GetVal = gui.GetValue
+
 local function handleOther()
     if BETAFEATURE_LAGSYNC:GetValue() then
         suyuSwitch = not suyuSwitch;
@@ -110,128 +128,155 @@ local function handleOther()
         local yaw = 180;
         local lby = 0;
 
-        if not pLocal then
-            return
-        end
-    
-        local vel = math.sqrt(pLocal:GetPropFloat( "localdata", "m_vecVelocity[0]" )^2 + pLocal:GetPropFloat( "localdata", "m_vecVelocity[1]" )^2)
-    
-        if vel < 5 then
-            if suyuSwitch then
-                rotation = -55
-                yaw = 167
-                lby = 25
+        if velocity ~= nil then
+
+            if velocity < 5 then
+                if suyuSwitch then
+                    rotation = -55
+                    yaw = 167
+                    lby = 25
+                else
+                    rotation = -30
+                    yaw = -170
+                    lby = 50
+                end
+
+                --[[if suyuSwitch then
+                    rotation = 55
+                    yaw = -150  
+                    lby = 0
+                else
+                    rotation = -55
+                    yaw = 170
+                    lby = 0
+                end]]
             else
-                rotation = -30
-                yaw = -170
-                lby = 50
+                if suyuSwitch then
+                    rotation = -50
+                    yaw = 167
+                    lby = 10
+                else
+                    rotation = -15
+                    yaw = -160
+                    lby = 50
+                end
             end
 
-            --[[if suyuSwitch then
-                rotation = 55
-                yaw = -150  
-                lby = 0
-            else
-                rotation = -55
-                yaw = 170
-                lby = 0
-            end]]
-        else
-            if suyuSwitch then
-                rotation = -50
-                yaw = 167
-                lby = 10
-            else
-                rotation = -15
-                yaw = -160
-                lby = 50
-            end
-        end
-
-        gui.SetValue("rbot.antiaim.right.rotation", rotation * -1)
-        gui.SetValue("rbot.antiaim.right", yaw * -1)
-        gui.SetValue("rbot.antiaim.right.lby", lby * -1)
+            SetVal("rbot.antiaim.right.rotation", rotation * -1)
+            SetVal("rbot.antiaim.right", yaw * -1)
+            SetVal("rbot.antiaim.right.lby", lby * -1)
         
-        gui.SetValue("rbot.antiaim.left.rotation", rotation)
-        gui.SetValue("rbot.antiaim.left", yaw)
-        gui.SetValue("rbot.antiaim.left.lby", lby)
+            SetVal("rbot.antiaim.left.rotation", rotation)
+            SetVal("rbot.antiaim.left", yaw)
+            SetVal("rbot.antiaim.left.lby", lby)
 
-        if shouldInvert then
-            rotation = rotation * -1
-            yaw = yaw * -1
-            lby = lby * -1
+            if shouldInvert then
+                rotation = rotation * -1
+                yaw = yaw * -1
+                lby = lby * -1
+            end
+
+            SetVal("rbot.antiaim.base.rotation", rotation)
+            SetVal("rbot.antiaim.base", yaw)
+            SetVal("rbot.antiaim.base.lby", lby)
         end
-
-        gui.SetValue("rbot.antiaim.base.rotation", rotation)
-        gui.SetValue("rbot.antiaim.base", yaw)
-        gui.SetValue("rbot.antiaim.base.lby", lby)
     end
 end
 
 local function handleDesync()
 
     local lby = nil;
-    local rotationVal = gui.GetValue("rbot.antiaim.base.rotation")
+    local rotationVal = nil;
 
-    if desyncInvert then
-        gui.SetValue("rbot.antiaim.base.rotation", 58)
-        gui.SetValue("rbot.antiaim.left.rotation", -58)
-        gui.SetValue("rbot.antiaim.right.rotation", 58)
+    if RAGESU_ROTATION_SWAY:GetValue() then
+        RAGESU_LBY_MODE:SetValue(2)
+        local min = 0;
+        local max = 0;
+        local swapSafety = 0;
+        if RAGESU_ROTATION_SWAY_RANGEMIN:GetValue() < RAGESU_ROTATION_SWAY_RANGEMAX:GetValue() then
+            min = RAGESU_ROTATION_SWAY_RANGEMIN:GetValue()
+            max = RAGESU_ROTATION_SWAY_RANGEMAX:GetValue()
+        else
+            min = RAGESU_ROTATION_SWAY_RANGEMAX:GetValue()
+            max = RAGESU_ROTATION_SWAY_RANGEMIN:GetValue()
+        end
+
+        if min > -1.51 and min < 1.51 then
+            swapSafety = 1.51;
+        end
+
+        if not desyncInvert then
+            if currentVal <= max*-1 then positiveDir = true end
+            if currentVal >= (min*-1)-swapSafety then positiveDir = false end
+            if positiveDir then currentVal = currentVal + RAGESU_ROTATION_SWAY_SPEED:GetValue() else currentVal = currentVal - RAGESU_ROTATION_SWAY_SPEED:GetValue() end
+        else
+            if currentVal <= min+swapSafety then positiveDir = true end
+            if currentVal >= max then positiveDir = false end
+            if positiveDir then currentVal = currentVal + RAGESU_ROTATION_SWAY_SPEED:GetValue() else currentVal = currentVal - RAGESU_ROTATION_SWAY_SPEED:GetValue() end
+        end
+        rotationVal = currentVal
+
+        SetVal("rbot.antiaim.base.rotation", rotationVal)
+        SetVal("rbot.antiaim.left.rotation", -rotationVal)
+        SetVal("rbot.antiaim.right.rotation", rotationVal)
     else
-        gui.SetValue("rbot.antiaim.base.rotation", -58)
-        gui.SetValue("rbot.antiaim.left.rotation", 58)
-        gui.SetValue("rbot.antiaim.right.rotation", -58)
+        if desyncInvert then
+            SetVal("rbot.antiaim.base.rotation", 58)
+            SetVal("rbot.antiaim.left.rotation", -58)
+            SetVal("rbot.antiaim.right.rotation", 58)
+        else
+            SetVal("rbot.antiaim.base.rotation", -58)
+            SetVal("rbot.antiaim.left.rotation", 58)
+            SetVal("rbot.antiaim.right.rotation", -58)
+        end
+        rotationVal = gui.GetValue("rbot.antiaim.base.rotation")
     end
 
-    if RAGESU_LBY_MODE:GetValue() == 0 then
+    if RAGESU_LBY_MODE:GetValue() == 1 then
         lby = 0
-    elseif RAGESU_LBY_MODE:GetValue() == 1 then
+    elseif RAGESU_LBY_MODE:GetValue() == 2 then
         if rotationVal > 0 then
             lby = 58
         else
             lby = -58
         end
-    else
-        if globals.RealTime() > swayLasttime + 1.125 then
+    elseif RAGESU_LBY_MODE:GetValue() == 3 then
+        if globals.RealTime() > swayLasttime + 1.1 then
             swaySwitch = not swaySwitch;
             swayLasttime = globals.RealTime()
         end
 
         if swaySwitch then
-            lby = 58;
+            lby = 120;
         else
-            lby = -58;
+            lby = -120;
         end
     end
 
     if lby ~= nil then
-        gui.SetValue("rbot.antiaim.base.lby", lby*-1)
-        gui.SetValue("rbot.antiaim.left.lby", lby)
-        gui.SetValue("rbot.antiaim.right.lby", lby*-1)
+        SetVal("rbot.antiaim.base.lby", lby*-1)
+        SetVal("rbot.antiaim.left.lby", lby)
+        SetVal("rbot.antiaim.right.lby", lby*-1)
     end
 end
 
 local function handleVelocity()
 
-    if not pLocal then
-        return
-    end
-
-    local vel = math.sqrt(pLocal:GetPropFloat( "localdata", "m_vecVelocity[0]" )^2 + pLocal:GetPropFloat( "localdata", "m_vecVelocity[1]" )^2)
-
-    if RAGESU_JUMPSCOUT:GetValue() then
-        if vel > 5 then
-            gui.SetValue("misc.strafe.enable", 1)
-        else
-            gui.SetValue("misc.strafe.enable", 0)
+    if velocity ~= nil then
+        if RAGESU_JUMPSCOUT:GetValue() then
+            if velocity > 5 then
+                SetVal("misc.strafe.enable", 1)
+            else
+                SetVal("misc.strafe.enable", 0)
+            end
         end
-    end
-
-    if RAGESU_DOUBLETAP:GetValue() then
-        if vel > 100 then
-            gui.SetValue("rbot.accuracy.weapon.asniper.doublefire", 2)
-        else
-            gui.SetValue("rbot.accuracy.weapon.asniper.doublefire", 1)
+    
+        if RAGESU_DOUBLETAP:GetValue() then
+            if velocity > 100 then
+                SetVal("rbot.accuracy.weapon.asniper.doublefire", 2)
+            else
+                SetVal("rbot.accuracy.weapon.asniper.doublefire", 1)
+            end
         end
     end
 end
@@ -264,36 +309,32 @@ end
 --- Hooks
 local function createMoveHook(cmd)
 
-    if not pLocal then
-        return
-    end
+    if pLocal and velocity ~= nil then
 
-    local vel = math.sqrt(pLocal:GetPropFloat( "localdata", "m_vecVelocity[0]" )^2 + pLocal:GetPropFloat( "localdata", "m_vecVelocity[1]" )^2)
+        if velocity ~= 0 then
+            swayLasttime = 0
+            if gui.GetValue("rbot.antiaim.base.rotation") > 0 then
+                swaySwitch = false;
+            else
+                swaySwitch = true;
+            end
+        end
+    
+        if RAGESU_CHOKESHOT:GetValue() > 0 then
+            if bit.band(cmd.buttons, bit.lshift(1, 0)) == 1 then
+                cmd.sendpacket = false;
+                chokeShotTicks = chokeShotTicks + 1
+            elseif chokeShotTicks > 0 then
+                if chokeShotTicks <= RAGESU_CHOKESHOT:GetValue() then
+                    cmd.sendpacket = false;
+                    chokeShotTicks = chokeShotTicks + 1;
+                else
+                    cmd.sendpacket = true;
+                    chokeShotTicks = 0;
+                end
+            end
+        end
 
-    if vel ~= 0 then 
-        swayLasttime = globals.RealTime() + 0.22
-        swaySwitch = false;
-    end
-
-    if RAGESU_CHOKESHOT:GetValue() and bit.band(cmd.buttons, bit.lshift(1, 0)) == 1 then
-        cmd.sendpacket = false;
-    end
-end
-
-local function drawHook()
-
-    handleKeypresses()
-
-    pLocal = entities.GetLocalPlayer()
-    handleVelocity()
-    handleManualAA()
-
-
-    if engine.GetMapName() == "" then
-        lastTick = 0;
-    end
-
-    if globals.TickCount() > lastTick then
         if not BETAFEATURE_180S:GetValue() and not BETAFEATURE_LAGSYNC:GetValue() then
             handleDesync()
         end
@@ -314,23 +355,34 @@ local function drawHook()
                     nospreadYaw = nospreadYaw + rng;
                 end
             end
-            gui.SetValue("rbot.antiaim.base", nospreadYaw)
-            gui.SetValue("rbot.antiaim.base.rotation", 58)
-            gui.SetValue("rbot.antiaim.base.lby", -120)
+            SetVal("rbot.antiaim.base", nospreadYaw)
+            SetVal("rbot.antiaim.base.rotation", 58)
+            SetVal("rbot.antiaim.base.lby", -120)
         end
-        
     end
-    handleOther()
 end
 
-local kek = 0
+local function drawHook()
+    pLocal = entities.GetLocalPlayer()
+
+    if pLocal then
+        velocity = math.sqrt(pLocal:GetPropFloat( "localdata", "m_vecVelocity[0]" )^2 + pLocal:GetPropFloat( "localdata", "m_vecVelocity[1]" )^2)
+    end
+
+    handleKeypresses()
+    handleVelocity()
+    handleManualAA()
+    handleOther()
+end
 
 local function eventHook(event)
     if event:GetName("weapon_fire") then
         if entities.GetByUserID(event:GetInt("userid")):GetTeamNumber() ~= entities.GetLocalPlayer():GetTeamNumber() then
             shouldInvert = not shouldInvert;
-            kek = kek + 1
-            print("yeet: " .. kek)
+
+            if RAGESU_DESYNC_INVERT_ON_SHOT:GetValue() then
+                desyncInvert = not desyncInvert;
+            end
         end
     end
 end
