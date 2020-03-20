@@ -3,6 +3,12 @@ I've pushed out the update 4.1, it adds back the legacy feature "Rotation sway" 
 Choke shot got an update too, now you can choke as many ticks as you like.
 To turn it off, simply set it to 0.
 However, as of now, sendpackets seems to have a bug. It may be that this feature
-is not workins as intended.
+is not working as intended.
 
 Make sure to check on this tab from time to time!
+
+- Wall of shame -
+These discord tags should not be trusted.
+WARNING: The following discord tags are owned by the dumbest faggots I've ever seen.
+
+Yxki#3308 for selling luas/pasting RageSU and selling it.
