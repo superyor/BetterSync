@@ -1,8 +1,8 @@
 Hello RageSU users!
-I've pushed out the update 4.1, it adds back the legacy feature "Rotation sway" in an improved form.
-Choke shot got an update too, now you can choke as many ticks as you like.
-To turn it off, simply set it to 0.
-However, as of now, sendpackets seems to have a bug. It may be that this feature
-is not workins as intended.
+I've pushed out the update 4.2, the beta version is now gone, lagsync and 180s
+are now in the normal release.
+
+Due to people trying to paste this and sell it im closing up the source. 
+From now on, RageSU will no longer be open source.
 
 Make sure to check on this tab from time to time!

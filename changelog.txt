@@ -1,47 +1,12 @@
 Changelog:
 
-[Release 4.0]
-Both builds:
-* Renamed lua to RageSU to fit the future of the lua script better.
-* Recoded most of the lua script.
-* Added news page.
-* Added invert for the right side of the autodirection.
-* Removed Rotation settings.
-* Removed LBY settings.
-* Added LBY mode "None", "Opposite" and "Sway"
-* Added Autochoose doubletap
-* Added choke shot.
+[Release 4.2] --- Builds collide.
+* Beta build is no more.
 
-Beta build:
-* Added 180s, a nospread antiaim.
-* Changes on lagsync.
+* Added more invert on ... options.
+* Added inverter indicator.
+* Added 2 more lagsync types.
+* Added lagsync timebase selection.
+* Some fixes here and there.
 
-[Release 4.0.1]
-
-Beta build:
-* Changes on lagsync
-* Made lagsync framebased instead of tickbased.
-* Added different lagsync values while moving.
-
-[Release 4.0.2]
-Both Builds:
-* Fixed Opposite LBY mode.
-
-Beta build:
-* changes on lagsync.
-* Added on shot inverter on lagsync.
-
-[Release 4.1]
-Both Builds:
-* Added rotation sway with slightly improved algorithm.
-  * Added rotation sway maximum range.
-  * Added rotation sway minimum range.
-  * Added rotation sway speed.
-
-* Added "Invert on" multibox.
-  * Added "Invert on enemy's shot" option
-
-* Antiaim values are now changed inside of CreateMove instead of Draw.
-* Localized part of the API for faster performance.
-* Adjusted Manual Anti-Aim groupbox.
-* Choke shot now has a slider to adjust how many ticks should be choked.
+* Manual AA is coming next update.
