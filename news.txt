@@ -1,9 +1,17 @@
 Hello RageSU users!
-I've pushed out the update 4.2, the beta version is now gone, lagsync and 180s
-are now in the normal release.
+With the update 1.0 on the 29th of April 2020, I proudly announce that RageSU
+has been completely recoded.
 
-Due to people trying to paste this and sell it im closing up the source. 
-From now on, RageSU will no longer be open source.
+Old features have been significantly improved, a complete new config system has been added,
+you can share config codes to your friends so they can easily get your config!
+
+Sadly, I doubt the pasting issue will end, this lua started small as a fun project,
+but it blew up to the point where many people try to do something similar.
+Due to that reason, RageSU will remain closed source for the next time.
+It will be obfuscated, which can impact performance, if there is a way to release scripts
+without releasing the source, I will use that way to boost the performance.
+
+Take care and have fun!
 
 Make sure to check on this tab from time to time!
 

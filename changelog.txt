@@ -1,12 +1,9 @@
-Changelog:
-
-[Release 4.2] --- Builds collide.
-* Beta build is no more.
-
-* Added more invert on ... options.
-* Added inverter indicator.
-* Added 2 more lagsync types.
-* Added lagsync timebase selection.
-* Some fixes here and there.
-
-* Manual AA is coming next update.
+[Release 5.0/1.0 - April Recode]
+- RageSU has been recoded from scratch to be more user friendly.
+- RageSU now uses modules.
+- Menu design has been modernized alot.
+- Added all old features back in an improved form.
+- Added Manual antiaim.
+- Added config system.
+- Added config code sharing system.
+- Added logfile system that will allow for better bugfixing.
