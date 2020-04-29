@@ -7,3 +7,15 @@
 - Added config system.
 - Added config code sharing system.
 - Added logfile system that will allow for better bugfixing.
+
+[Release 5.0/1.0b]
+- Changed version number to 5.0/1.0
+- Fixed config creation throwing an error if the config had a " in the name.
+
+[Release 5.0/1.1]
+- Fixed Indicators being stacked while being dead.
+- Adjusted Lagsync menu tab to look better.
+- Adjusted lagsync menu to fix accidentally clicking a preset load button when choosing the timebase.
+
+[Release 5.0/1.2]
+- Fixed Fixed manual antiaim not working as intended.
