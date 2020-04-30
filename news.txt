@@ -11,6 +11,12 @@ Due to that reason, RageSU will remain closed source for the next time.
 It will be obfuscated, which can impact performance, if there is a way to release scripts
 without releasing the source, I will use that way to boost the performance.
 
+Thanks a LOT for all the positive support, I just realized that RageSU is the
+most viewed lua thread and I would like to thank every one of you. Originally starting
+as a meme project, I learned alot about lua and improved myself.
+We also are approved now so that's another big milestone that we reached now!
+Again, thank you all so much for the support!
+
 Take care and have fun!
 
 Make sure to check on this tab from time to time!
