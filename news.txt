@@ -1,7 +1,6 @@
 Hello RageSU users!
 
 --- BREAKING NEWS ---
-
 Later today there will be an update regarding config files and config codes.
 The update will add file checksums but that has the cost that every config code or config file
 that has been created since, will be lost.
