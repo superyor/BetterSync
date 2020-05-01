@@ -1,4 +1,15 @@
 Hello RageSU users!
+
+--- BREAKING NEWS ---
+
+Later today there will be an update regarding config files and config codes.
+The update will add file checksums but that has the cost that every config code or config file
+that has been created since, will be lost.
+Please take screenshots of your configs and recreate the configs using that after the update to
+the version 5.0/1.5.
+Thank you for your attention.
+---------------------
+
 With the update 1.0 on the 29th of April 2020, I proudly announce that RageSU
 has been completely recoded.
 
