@@ -49,3 +49,6 @@
 - Fixed menu glitch.
 - Fixed checksum check when the checksum is a negative number.
 - Fixed console spamming error due to menu glitch.
+
+[Release 5.0/1.7]
+- Fixed checksum check not working with decimal numbers.
