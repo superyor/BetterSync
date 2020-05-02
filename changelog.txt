@@ -52,3 +52,6 @@
 
 [Release 5.0/1.7]
 - Fixed checksum check not working with decimal numbers.
+
+[Release 5.0/1.8]
+- Checksum calculation is not done on load process, should fix any calculation errors.
