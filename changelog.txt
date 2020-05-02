@@ -44,3 +44,8 @@
 - Repositioned some GUI objects and created a new feature tab.
 - Fixed at targets from sometimes using an invisible/invalid entity as at targets entity.
 - Fixed the three lagsync presets because they were corrupted.
+
+[Release 5.0/1.6]
+- Fixed menu glitch.
+- Fixed checksum check when the checksum is a negative number.
+- Fixed console spamming error due to menu glitch.
