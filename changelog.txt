@@ -55,3 +55,7 @@
 
 [Release 5.0/1.8]
 - Checksum calculation is not done on load process, should fix any calculation errors.
+
+[Release 5.0/1.9]
+- Added playercount which is only visible for me. This is completely anonymous, you don't have to worry!
+- Fixed jumpscout fix not working properly.
