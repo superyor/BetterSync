@@ -59,3 +59,8 @@
 [Release 5.0/1.9]
 - Added playercount which is only visible for me. This is completely anonymous, you don't have to worry!
 - Fixed jumpscout fix not working properly.
+
+[Release 5.0/1.9.1]
+- Added Rapid DT Mode, tries to make the first shot on an enemy always a DT shot.
+- Renamed and moved some GUI objects around.
+- Fixed bug caused by newest aw update.
