@@ -65,6 +65,6 @@
 - Renamed and moved some GUI objects around.
 - Fixed bug caused by newest aw update.
 
-[Release 5.0/1.9.1]
+[Release 5.0/1.9.2]
 - Fixed Issue causing endless loading.
 - Updated lua to fit the new framework module update.
