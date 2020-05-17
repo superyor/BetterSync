@@ -64,3 +64,7 @@
 - Added Rapid DT Mode, tries to make the first shot on an enemy always a DT shot.
 - Renamed and moved some GUI objects around.
 - Fixed bug caused by newest aw update.
+
+[Release 5.0/1.9.1]
+- Fixed Issue causing endless loading.
+- Updated lua to fit the new framework module update.
