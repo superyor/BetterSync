@@ -1,0 +1,27 @@
+{
+    "licensepage": {
+        "name": "License"
+    },
+    "misc": {
+        "name": "Misc",
+        "scoutfix": {
+            "name": "Jumpscout Fix - Fix Autostrafer",
+            "desc": "Disables autostrafer to fix jumpscouting."
+        },
+        "hitchancefix": {
+            "name": "Jumpscout Fix - Fix Hitchance",
+            "desc": "Sets hitchance to 1 in air automatically."
+        },
+        "chokeshotTicks": {
+            "name": "Chokeshot - Ticks",
+            "desc": "Choke x amount of ticks on shot. 0 is disabled."
+        },
+        "chokeshotAfter": {
+            "name": "Chokeshot - Aftershot",
+            "desc": "Choke on tick of the shot, or one tick afterwards."
+        }
+    },
+    "rage": {
+        "name": "Rage"
+    }
+}

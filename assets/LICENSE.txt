@@ -1,0 +1,14 @@
+This software is licensed under Superyu's Lua License.
+-------------------------------------------------------------------------------------------------------------------
+·Superyu's Lua Licence
+·Version 1, January 2021
+·Copyright (C) 2021 Janek S.       
+·Terms and conditions for copying, distribution and modification.
+                            
+  1. You are free to share the original work under a few conditions.
+    1a. Outright copyright infringement - Don't just copy this and change the name.
+    1b. Don't sell the original work.
+    1c. Don't modify the original work to contain hidden harmful content.
+    1d. Don't claim the original work as yours.
+    1e. You have to mention me by nickname and link to my youtube channel.
+        (https://www.youtube.com/c/superyu1337)
