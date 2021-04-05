@@ -1,2 +1,0 @@
-[Release 5.0/1.9.2d]
-- Switched to a loader based loading process so the autoupdater won't be needed anymore.
