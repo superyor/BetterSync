@@ -1,0 +1,27 @@
+{
+    "licensepage": {
+        "name": "License"
+    },
+    "misc": {
+        "name": "Misc",
+        "scoutfix": {
+            "name": "Jumpscout fixeth - fixeth autostraf'r",
+            "desc": "Disables autostraf'r to fixeth jumpscouting"
+        },
+        "hitchancefix": {
+            "name": "Jumpscout fixeth - fixeth hitchance",
+            "desc": "Sets hitchance to 1 in air automatically"
+        },
+        "chokeshotTicks": {
+            "name": "Chokeshot - Ticks",
+            "desc": "Choketh x amount of ticks on did shoot.  0 is disabl'd"
+        },
+        "chokeshotAfter": {
+            "name": "Chokeshot - aft'rshot",
+            "desc": "Choketh on ticketh of the did shoot, 'r one ticketh aft'rwards"
+        }
+    },
+    "rage": {
+        "name": "Rage"
+    }
+}
