@@ -1,26 +1,19 @@
-# DON'T BE A DICK PUBLIC LICENSE
+# Superyu's Lua Licence
 
-> Version 1.1, December 2016
+> Version 1.1, April 2021
 
-> Copyright (C) [2020] [Janek S.]
+> Copyright (C) 2021 Janek S.
+> Superyu's Lua Licence
+> Terms and conditions for copying, distribution and modification.
 
-Everyone is permitted to copy and distribute verbatim or modified
-copies of this license document.
+1. You are free to share the original work under a few conditions.
+  1a. Outright copyright infringement - Don't just copy this and change the name.
+  1b. Don't sell the original work.
+  1c. Don't modify the original work to contain hidden harmful content.
+  1d. Don't claim the original work as yours.
+  1e. You have to mention me by nickname and link to my youtube channel. (https://www.youtube.com/c/superyu1337)
 
-> DON'T BE A DICK PUBLIC LICENSE
-> TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-
-1. Do whatever you like with the original work, just don't be a dick.
-
-   Being a dick includes - but is not limited to - the following instances:
-
- 1a. Outright copyright infringement - Don't just copy this and change the name.
- 1b. Selling the unmodified original with no work done what-so-ever, that's REALLY being a dick.
- 1c. Modifying the original work to contain hidden harmful content. That would make you a PROPER dick.
-
-2. If you become rich through modifications, related works/services, or supporting the original work,
-share the love. Only a dick would make loads off this work and not buy the original work's
-creator(s) a pint.
-
-3. Code is provided with no warranty. Using somebody else's code and bitching when it goes wrong makes
-you a DONKEY dick. Fix the problem yourself. A non-dick would submit the fix back.
+2. You are free to share a modified version of the original work under a few conditions.
+  2a. The modified version must mention that it is a modification.
+  2b. The modified version must link to the original's GitHub page.
+  2c. Under no circumstances are you allowed to sell a modified version.

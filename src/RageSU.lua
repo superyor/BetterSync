@@ -70,7 +70,6 @@ local Helpers = {
 }
 
 local UI = {
-
     Objects = {};
 
     Init = function(self)

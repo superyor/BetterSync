@@ -12,3 +12,8 @@ This software is licensed under Superyu's Lua License.
     1d. Don't claim the original work as yours.
     1e. You have to mention me by nickname and link to my youtube channel.
         (https://www.youtube.com/c/superyu1337)
+
+  2. You are free to share a modified version of the original work under a few conditions.
+    2a. The modified version must mention that it is a modification.
+    2b. The modified version must link to the original's GitHub page.
+    2c. Under no circumstances are you allowed to sell a modified version.
