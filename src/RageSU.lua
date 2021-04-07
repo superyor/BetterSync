@@ -6,7 +6,7 @@ local GuiGetValue = gui.GetValue;
 
 local CurrentDirectory = function()
     local str = GetScriptName();
-    str = str:match("^.*/(.*)") or str;
+    str = str:match('^.*/(.*)') or str;
     return GetScriptName():sub(0, string.len(GetScriptName())  - string.len(str));
 end
 
@@ -20,11 +20,11 @@ local Helpers = {
     LoadLibraries = function(self)
         file.Enumerate(function(filename)
             local oFilename = filename;
-            filename = filename:gsub('%-', '_');
+            --filename = filename:gsub('%-', '_');
 
-            if (filename:find(Metadata.CurrentDirectory:gsub('%-', '_') .. 'lib')) then
+            if (filename:find(Metadata.CurrentDirectory .. 'assets/lib/')) then
                 local content = file.Read(oFilename);
-                filename = filename:match("[^/]*.dat$");
+                filename = filename:match('[^/]*.dat$');
                 filename = filename:sub(0, #filename - 4);
                 self[filename] = loadstring(content)();
             end
@@ -73,20 +73,41 @@ local UI = {
     Objects = {};
 
     Init = function(self)
+        local languagePaths = {};
+        local languageNames = {};
+
+        file.Enumerate(function(filename)
+            local oFilename = filename;
+            --filename = filename:gsub('%-', '_');
+
+            if (filename:find(Metadata.CurrentDirectory .. 'assets/tr/')) then
+                filename = filename:match('[^/]*.dat$');
+                filename = filename:sub(0, #filename - 4);
+                languagePaths[filename] = oFilename;
+                languageNames[#languageNames+1] = filename:sub(1,1):upper() .. filename:sub(2);
+            end
+        end)
+
+        print(languagePaths);
+
         local lang = Helpers.json.decode(file.Read(Metadata.CurrentDirectory .. 'assets/tr/english.dat'));
 
-        Helpers.Framework:Init(gui.Reference('Ragebot'), 'rbot.ragesu', Metadata.Name .. ' - ' .. Metadata.Version);
+        Helpers.Framework:Init(gui.Reference('Ragebot'), 'ragesu', Metadata.Name .. ' - ' .. Metadata.Version);
 
-        local Rage = Helpers.Framework:AddTab(lang.rage.name, 'rage');
+        local Rage = Helpers.Framework:AddTab(lang.rage.name);
 
-        local Misc = Helpers.Framework:AddTab(lang.misc.name, 'misc');
-        self.Objects.ScoutFix = gui.Checkbox(Misc, 'rbot.ragesu.misc.scoutfix', lang.misc.scoutfix.name, false);
-        self.Objects.HitchanceFix = gui.Checkbox(Misc, 'rbot.ragesu.misc.hitchancefix', lang.misc.hitchancefix.name, false);
+        local Misc = Helpers.Framework:AddTab(lang.misc.name);
+        self.Objects.ScoutFix = gui.Checkbox(Misc, 'ragesu.misc.scoutfix', lang.misc.scoutfix.name, false);
+        self.Objects.HitchanceFix = gui.Checkbox(Misc, 'ragesu.misc.hitchancefix', lang.misc.hitchancefix.name, false);
 
-        self.Objects.ChokeshotTicks = gui.Slider(Misc, 'rbot.ragesu.misc.chokeshot.ticks', lang.misc.chokeshotTicks.name, 0, 0, 16);
-        self.Objects.ChokeshotAfter = gui.Checkbox(Misc, 'rbot.ragesu.misc.chokeshot.after', lang.misc.chokeshotAfter.name, false);
+        self.Objects.ChokeshotTicks = gui.Slider(Misc, 'ragesu.misc.chokeshot.ticks', lang.misc.chokeshotTicks.name, 0, 0, 16);
+        self.Objects.ChokeshotAfter = gui.Checkbox(Misc, 'ragesu.misc.chokeshot.after', lang.misc.chokeshotAfter.name, false);
 
-        local LicensePage = Helpers.Framework:AddTab(lang.licensepage.name, 'licensepage');
+
+        local SettingsTab = Helpers.Framework:AddTab(lang.settings.name);
+        self.Objects.Language = gui.Combobox(SettingsTab, 'ragesu.settings.language', 'Language', 'English');
+
+        local LicensePage = Helpers.Framework:AddTab(lang.licensepage.name);
         local LicenseText = gui.Text(LicensePage, file.Read(Metadata.CurrentDirectory .. 'assets/LICENSE.txt'));
 
         for k, v in pairs(lang) do
@@ -108,7 +129,7 @@ local Features = {
         scoutfix = {
             scout1 = true;
             scout2 = true;
-            scouthc = GuiGetValue("rbot.accuracy.weapon.scout.hitchance");
+            scouthc = GuiGetValue('rbot.accuracy.weapon.scout.hitchance');
         };
 
         chokeshot = {
@@ -133,36 +154,36 @@ local Features = {
             local scoutfix = UI.Objects.ScoutFix:GetValue();
             local hitchancefix = UI.Objects.HitchanceFix:GetValue();
 
-            local velX = pLocal:GetPropFloat( "localdata", "m_vecVelocity[0]" );
-            local velY = pLocal:GetPropFloat( "localdata", "m_vecVelocity[1]" );
+            local velX = pLocal:GetPropFloat('localdata', 'm_vecVelocity[0]');
+            local velY = pLocal:GetPropFloat('localdata', 'm_vecVelocity[1]');
             local vel = math.sqrt((velX*velX) + (velY*velY));
 
             if (vel < 10) then
                 if (scoutfix) then
-                    GuiSetValue("misc.strafe.enable", 0);
-                    GuiSetValue("misc.strafe.air", 0);
+                    GuiSetValue('misc.strafe.enable', 0);
+                    GuiSetValue('misc.strafe.air', 0);
                 end
             else
-                GuiSetValue("misc.strafe.enable", 1);
-                GuiSetValue("misc.strafe.air", 1);
+                GuiSetValue('misc.strafe.enable', 1);
+                GuiSetValue('misc.strafe.air', 1);
             end
 
             if (hitchancefix) then
-                local onground = bit.band(pLocal:GetPropInt("m_fFlags"), 1);
+                local onground = bit.band(pLocal:GetPropInt('m_fFlags'), 1);
 
                 if (onground == 1) then
-                    if (self:GetVar("scoutfix", "scout2")) then
-                        GuiSetValue("rbot.accuracy.weapon.scout.hitchance", self:GetVar("scoutfix", "scouthc"));
-                        self:SetVar("scoutfix", "scout1", true);
-                        self:SetVar("scoutfix", "scout2", false);
+                    if (self:GetVar('scoutfix', 'scout2')) then
+                        GuiSetValue('rbot.accuracy.weapon.scout.hitchance', self:GetVar('scoutfix', 'scouthc'));
+                        self:SetVar('scoutfix', 'scout1', true);
+                        self:SetVar('scoutfix', 'scout2', false);
                     end
                 else
                     if (pLocal:GetWeaponInaccuracy() < 0.011) then
-                        if (self:GetVar("scoutfix", "scout1")) then
-                            self:SetVar("scoutfix", "scouthc", GuiGetValue("rbot.accuracy.weapon.scout.hitchance"));
-                            GuiSetValue("rbot.accuracy.weapon.scout.hitchance", 1);
-                            self:SetVar("scoutfix", "scout1", false);
-                            self:SetVar("scoutfix", "scout2", true);
+                        if (self:GetVar('scoutfix', 'scout1')) then
+                            self:SetVar('scoutfix', 'scouthc', GuiGetValue('rbot.accuracy.weapon.scout.hitchance'));
+                            GuiSetValue('rbot.accuracy.weapon.scout.hitchance', 1);
+                            self:SetVar('scoutfix', 'scout1', false);
+                            self:SetVar('scoutfix', 'scout2', true);
                         end
                     end
                 end
@@ -181,7 +202,7 @@ local Features = {
             end
 
             if (pLocal ~= nil) then
-                local pWeap = pLocal:GetPropEntity("m_hActiveWeapon");
+                local pWeap = pLocal:GetPropEntity('m_hActiveWeapon');
 
                 if (pWeap ~= nil) then
                     local pWeapClass = pWeap:GetClass();
@@ -196,38 +217,38 @@ local Features = {
                         isAllowed = false;
                     end
 
-                    if (pWeapID ~= 64 and pWeapClass ~= "CKnife" and isAllowed) then
-                        if (self:GetVar("chokeshot", "shotLastTick")) then
-                            self:SetVar("chokeshot", "shotLastTick", false);
-                            self:SetVar("chokeshot", "shooting", true);
+                    if (pWeapID ~= 64 and pWeapClass ~= 'CKnife' and isAllowed) then
+                        if (self:GetVar('chokeshot', 'shotLastTick')) then
+                            self:SetVar('chokeshot', 'shotLastTick', false);
+                            self:SetVar('chokeshot', 'shooting', true);
                         end
 
                         if (bit.band(cmd.buttons, bit.lshift(1, 0)) == 1) then
-                            if (self:GetVar("chokeshot", "shooting")) then
+                            if (self:GetVar('chokeshot', 'shooting')) then
                                 cmd.sendpacket = true;
-                                self:SetVar("chokeshot", "chokedTicks", 0);
-                                self:SetVar("chokeshot", "shooting", false);
+                                self:SetVar('chokeshot', 'chokedTicks', 0);
+                                self:SetVar('chokeshot', 'shooting', false);
 
                                 if (aftershot) then
-                                    self:SetVar("chokeshot", "shotLastTick", true);
+                                    self:SetVar('chokeshot', 'shotLastTick', true);
                                 end
                             else
                                 if (aftershot) then
-                                    self:SetVar("chokeshot", "shotLastTick", true);
+                                    self:SetVar('chokeshot', 'shotLastTick', true);
                                 else
-                                    self:SetVar("chokeshot", "shooting", true);
+                                    self:SetVar('chokeshot', 'shooting', true);
                                 end
                             end
                         end
 
-                        if (self:GetVar("chokeshot", "shooting")) then
-                            if (self:GetVar("chokeshot", "chokedTicks") <= ticks) then
+                        if (self:GetVar('chokeshot', 'shooting')) then
+                            if (self:GetVar('chokeshot', 'chokedTicks') <= ticks) then
                                 cmd.sendpacket = false;
-                                self:SetVar("chokeshot", "chokedTicks", self:GetVar("chokeshot", "chokedTicks") + 1);
+                                self:SetVar('chokeshot', 'chokedTicks', self:GetVar('chokeshot', 'chokedTicks') + 1);
                             else
                                 cmd.sendpacket = true;
-                                self:SetVar("chokeshot", "chokedTicks", 0);
-                                self:SetVar("chokeshot", "shooting", false);
+                                self:SetVar('chokeshot', 'chokedTicks', 0);
+                                self:SetVar('chokeshot', 'shooting', false);
                             end
                         end
                     end

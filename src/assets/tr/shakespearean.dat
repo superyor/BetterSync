@@ -2,6 +2,13 @@
     "licensepage": {
         "name": "License"
     },
+    "settings": {
+        "name": "Settings",
+        "language": {
+            "name": "Language",
+            "desc": "Changes the language of RageSU, requires a restart."
+        }
+    }
     "misc": {
         "name": "Misc",
         "scoutfix": {
