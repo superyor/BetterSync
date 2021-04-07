@@ -1,5 +1,6 @@
 local Paths = {
     'src/RageSU.lua',
+    'src/assets/LICENSE.txt',
     'src/assets/lib/json.dat',
     'src/assets/tr/english.dat',
     'src/assets/tr/shakespearean.dat',
