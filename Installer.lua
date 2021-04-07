@@ -1,8 +1,8 @@
 local Paths = {
     'src/RageSU.lua',
-    'src/lib/json.dat',
-    'src/tr/english.dat',
-    'src/tr/shakespearean.dat',
+    'src/assets/lib/json.dat',
+    'src/assets/tr/english.dat',
+    'src/assets/tr/shakespearean.dat',
 }
 
 local function Download(path)
